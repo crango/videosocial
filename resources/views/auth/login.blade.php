@@ -14,7 +14,7 @@
                     <small>{{ __('Forgot Password?') }}</small>
                 </a>
             </div>
-            <input type="password" class="form-control" placeholder=".........">
+            <input type="password" name="password" class="form-control" placeholder=".........">
         </div>
         <div class="mt-4">
             <div class="row">

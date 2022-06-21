@@ -21,19 +21,17 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/vendor/owl-carousel/owl.carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/vendor/owl-carousel/owl.theme.css') }}">
     <!-- END: Vendor CSS-->
-
-    <!-- BEGIN: Theme CSS-->
-    <!-- END Theme CSS-->
-    <!-- BEGIN: Page CSS-->
-    <!-- END: Page CSS-->
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('dashboard/css/osahan.css') }}">
+    <link rel="stylesheet" type="text/css"href="{{ asset('css/toastr.min.css') }}">
     <!-- END: Custom CSS-->
 </head>
 <!-- END: Head-->
 <!-- BEGIN: Body-->
 
 <body class="login-main-body">
+    <input type="hidden" id="domainHost" value="{{ config('app.url') }}">
+    <input type="hidden" id="route_web" value="{{ route('web') }}">
     <section class="login-main-wrapper">
         <div class="container-fluid pl-0 pr-0">
             <div class="row no-gutters">
@@ -55,7 +53,7 @@
                         <div class="owl-carousel owl-carousel-login">
                             <div class="item">
                                 <div class="carousel-login-card text-center">
-                                    <img src="{{ asset('dashboard/img/favicon.png') }}" class="img-fluid"
+                                    <img src="{{ asset('dashboard/img/login.png') }}" class="img-fluid"
                                         alt="LOGO">
                                     <h5 class="mt-5 mb-3">​Watch videos offline</h5>
                                     <p class="mb-4">when an unknown printer took a galley of type and
@@ -89,19 +87,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Bootstrap core JavaScript
-        -->
-    <script src="{{ asset('dashboard/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('dashboard/vendor/bootstrap/js/bootstrap.bundle.min.js') }} "></script>
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('dashboard/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-    <!-- Owl Carousel -->
-    <script src="{{ asset('dashboard/vendor/owl-carousel/owl.carousel.js') }}"></script>
-
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('dashboard/js/custom.js') }}"></script>
     <script src="{{ url('') . mix('js/app.js') }}"></script>
     @if (isset($jsControllers))
         @foreach ($jsControllers as $jsController)

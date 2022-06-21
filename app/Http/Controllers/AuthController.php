@@ -30,7 +30,6 @@ class AuthController extends Controller
             return view('auth.login', [
                 'jsControllers' => [
                     0 => 'app/' . $this->path . '/HomeController.js',
-                    1 => 'app/' . $this->path . '/ValidatesController.js',
                 ],
                 'cssStyles' => [
                     0 => 'app/' . $this->path . '/style.css'
@@ -40,16 +39,17 @@ class AuthController extends Controller
         }
 
         auth()->attempt(request()->only('email', 'password'));
+
         if (!auth()->check()) {
             return $this->errorResponse([
                 'err' => true,
-                'message' => 'Wrong email or password'
+                'message' => __('Wrong email or password')
             ]);
         }
 
         return $this->successResponse([
             'err'        => false,
-            'message'    => __('Login success'),
+            'message'    => __('Login success')
         ]);
     }
 
@@ -85,11 +85,14 @@ class AuthController extends Controller
                 DB::beginTransaction();
                 $this->model->create([
                     'name' => request()->get('name'),
+                    'lastname' => request()->get('lastname'),
                     'email' => request()->get('email'),
-                    'image' => \env('DEFAULT_USER_PCITURE'),
-                    'role_id' => 2,
                     'password' => bcrypt(request()->get('password')),
-                    'remember_token' => Str::random(10),
+                    'phone' => request()->get('phone'),
+                    'country_id' => request()->get('country_id'),
+                    'state_id' => request()->get('state_id'),
+                    'city_id' => request()->get('city_id'),
+                    'remember_token' => Str::random(10)
                 ]);
                 DB::commit();
                 auth()->attempt(request()->only('email', 'password'));
@@ -97,6 +100,7 @@ class AuthController extends Controller
                     'err' => false,
                     'message' => __('Register success'),
                 ]);
+
             } catch (\Exception $e) {
                 DB::rollback();
                 return $this->errorResponse([

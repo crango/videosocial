@@ -13,10 +13,10 @@ Core = {
         }
     },
     post: function(url, data) {
-        return axios.post(urlWeb + "/" + url, data);
+        return axios.post("/" + url, data);
     },
     get: function(url) {
-        return axios.get(urlWeb + "/" + url);
+        return axios.get("/" + url);
     },
     buttons: function(index) {
             buttons =   `<center>
@@ -458,7 +458,9 @@ $( window ).on('load',function() {
     });
     Core.setThemeMode();
 });
-loadProgressBar();
+
+//loadProgressBar();
+/*
 axios.interceptors.request.use(function (config) {
     $.blockUI({ css: {
         border: 'none',
@@ -474,12 +476,12 @@ axios.interceptors.request.use(function (config) {
      });
     return config;
   }, function (error) {$.unblockUI();return Promise.reject(error);});
-axios.interceptors.response.use(function (response) { $.unblockUI(); return response;}, function(err) { $.unblockUI(); return Promise.reject(err);});
-
+axios.interceptors.response.use(function (response) { $.unblockUI(); return response;}, function(err) { $.unblockUI(); return Promise.reject(err);}); */
+/*
 var clipboard = new ClipboardJS('.btnCopy');
 clipboard.on('success', function (e) {
   Core.showToast('info','Código copiado correctamente!');
-});
+}); */
 
 $(document).on('click','#shareProduct', function() {
     var shareTextMessage = $('#shareTextMessage').val();

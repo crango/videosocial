@@ -27,15 +27,25 @@ Route::group(['prefix' => '/'], function ($router) {
         $router->post('/login', [App\Http\Controllers\AuthController::class, 'login']);
         $router->get('/register', [App\Http\Controllers\AuthController::class, 'register'])->name('register');
         $router->post('/register', [App\Http\Controllers\AuthController::class, 'register']);
-        $router->post('/states/{country}', [App\Http\Controllers\AuthController::class, 'states'])->name('states');
-        $router->post('/cities/{state}', [App\Http\Controllers\AuthController::class, 'cities'])->name('cities');
         $router->get('/reset-password', [App\Http\Controllers\AuthController::class, 'reset_password'])->name('reset-password');
         $router->post('/reset-password', [App\Http\Controllers\AuthController::class, 'reset_password']);
         $router->get('/forgot-password', [App\Http\Controllers\AuthController::class, 'forgot_password'])->name('forgot-password');
         $router->post('/forgot-password', [App\Http\Controllers\AuthController::class, 'forgot_password']);
-        $router->get('/logout', function () {
+        /*         $router->get('/logout', function () {
             auth()->logout();
             return redirect()->route('login');
-        })->name('auth.logout');
+        })->name('auth.logout'); */
+    });
+
+    $router->get('/states/{country}', [App\Http\Controllers\AuthController::class, 'states'])->name('states');
+    $router->get('/cities/{state}', [App\Http\Controllers\AuthController::class, 'cities'])->name('cities');
+
+    $router->group(['prefix' => '/', 'middleware' => ['web', 'auth:sanctum',]], function () use ($router) {
+        $router->get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('dashboard.logout');
+
+        $router->group(['prefix' => 'web', 'middleware' => 'auth'], function ($router) {
+            # Dashboard Home
+            $router->get('/home', [App\Http\Controllers\Web\HomeController::class, 'index'])->name('web');
+        });
     });
 });

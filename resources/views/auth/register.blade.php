@@ -1,7 +1,7 @@
 @extends('auth.app')
 @section('content')
     <!-- Register-->
-    <form action="#">
+    <form id="frmRegister">
         <div class="form-group">
             <label>{{ __('Name') }}</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Enter your name') }}">
@@ -13,7 +13,8 @@
         </div>
         <div class="form-group">
             <label>{{ __('Email') }}</label>
-            <input type="email" class="form-control" id="email" name="email" placeholder="{{ __('Enter your email') }}">
+            <input type="email" class="form-control" id="email" name="email"
+                placeholder="{{ __('Enter your email') }}">
         </div>
         <div class="form-group">
             <label>{{ __('Password') }}</label>
@@ -21,7 +22,7 @@
         </div>
         <div class="form-group">
             <label>{{ __('Country') }}</label>
-            <select id="country" name="country" class="form-control">
+            <select id="country" name="country_id" class="form-control">
                 <option>{{ __('Select Country') }}</option>
                 @foreach ($countries as $data)
                     <option value="{{ $data->id }}">{{ $data->name }}</option>
@@ -30,16 +31,16 @@
         </div>
         <div class="form-group">
             <label>{{ __('State') }}</label>
-            <select id="state" class="form-control"></select>
+            <select id="state" name="state_id" class="form-control"></select>
         </div>
         <div class="form-group">
             <label>{{ __('City') }}</label>
-            <select id="city" class="form-control"></select>
+            <select id="city" name="city_id" class="form-control"></select>
         </div>
-        <div class="form-group">
+        {{-- <div class="form-group">
             <label>{{ __('Promocode') }}</label>
             <input type="text" class="form-control" id="name" name="name" placeholder="{{ __('Promocode') }}">
-        </div>
+        </div> --}}
         <div class="mt-4">
             <button type="submit" class="btn btn-outline-primary btn-block btn-lg">{{ __('Sign Up') }}</button>
         </div>
