@@ -27,8 +27,9 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('cp')->nullable();
-            $table->string('last_login_ip')->nullable();
+            $table->date('birthdate')->nullable();
             $table->tinyText('bio')->nullable();
+            $table->string('last_login_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

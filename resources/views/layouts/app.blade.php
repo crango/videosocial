@@ -10,8 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name') }}</title>
     <!-- Favicon -->
-    <link rel="apple-touch-icon" href="{{ asset('dashboard/app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('dashboard/app-assets/images/ico/favicon.ico') }}">
+    <link rel="icon" type="image/png" href="{{ asset('dashboard') }}/img/favicon.png">
 
     <link href="{{ url('') . mix('css/app.css') }}" rel="stylesheet">
     @if (isset($cssStyles))
@@ -32,10 +31,7 @@
             @include('layouts.app-menu')
         @endauth
         <div id="content-wrapper">
-            <div class="container-fluid pb-0">
-                @yield('content')
-            </div>
-            <!-- /.container-fluid -->
+            @yield('content')
             @include('layouts.app-footer')
         </div>
         <!-- /.content-wrapper -->
@@ -72,12 +68,12 @@
     @endif
     <script>
         $(window).on('load', function() {
-            if (feather) {
-                feather.replace({
-                    width: 14,
-                    height: 14
-                });
-            }
+            /*             if (feather) {
+                            feather.replace({
+                                width: 14,
+                                height: 14
+                            });
+                        } */
             @if (Session::has('success'))
                 $(document).ready(function() {
                     Core.showToast('success', '{{ Session::get('success') }}');

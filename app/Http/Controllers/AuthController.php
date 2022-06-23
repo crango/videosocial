@@ -83,7 +83,8 @@ class AuthController extends Controller
         } else {
             try {
                 DB::beginTransaction();
-                $this->model->create([
+                $test = $this->model->create([
+                    'avatar' => 'https://ui-avatars.com/api/?name=' . request()->get('name'),
                     'name' => request()->get('name'),
                     'lastname' => request()->get('lastname'),
                     'email' => request()->get('email'),
@@ -94,13 +95,13 @@ class AuthController extends Controller
                     'city_id' => request()->get('city_id'),
                     'remember_token' => Str::random(10)
                 ]);
+
                 DB::commit();
                 auth()->attempt(request()->only('email', 'password'));
                 return $this->successResponse([
                     'err' => false,
                     'message' => __('Register success'),
                 ]);
-
             } catch (\Exception $e) {
                 DB::rollback();
                 return $this->errorResponse([

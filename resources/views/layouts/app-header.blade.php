@@ -61,7 +61,7 @@
             <a class="nav-link dropdown-toggle user-dropdown-link" href="#" id="userDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img alt="Avatar"
-                    src="{{ auth()->user()->avatar != null ? asset('storage') . '/' . auth()->user()->image : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}">
+                    src="{{ auth()->user()->avatar != 'https://ui-avatars.com/api/?name=' . auth()->user()->name ? asset('storage') . '/' . auth()->user()->avatar : 'https://ui-avatars.com/api/?name=' . auth()->user()->name }}">
                 {{ auth()->user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -69,7 +69,10 @@
                     Account</a>
                 <a class="dropdown-item" href="subscriptions.html"><i class="fas fa-fw fa-video"></i> &nbsp;
                     Subscriptions</a>
-                <a class="dropdown-item" href="settings.html"><i class="fas fa-fw fa-cog"></i> &nbsp; Settings</a>
+                <a class="dropdown-item" href="{{ route('web.profile') }}">
+                    <i class="fas fa-fw fa-cog"></i> &nbsp;
+                    {{ _('Profile') }}
+                </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i
                         class="fas fa-fw fa-sign-out-alt"></i> &nbsp; Logout</a>

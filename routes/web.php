@@ -41,11 +41,20 @@ Route::group(['prefix' => '/'], function ($router) {
     $router->get('/cities/{state}', [App\Http\Controllers\AuthController::class, 'cities'])->name('cities');
 
     $router->group(['prefix' => '/', 'middleware' => ['web', 'auth:sanctum',]], function () use ($router) {
-        $router->get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('dashboard.logout');
+        $router->get('/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('web.logout');
 
         $router->group(['prefix' => 'web', 'middleware' => 'auth'], function ($router) {
             # Dashboard Home
             $router->get('/home', [App\Http\Controllers\Web\HomeController::class, 'index'])->name('web');
+
+            # Settings
+            $router->group(['prefix' => 'settings'], function () use ($router) {
+                # Profile
+                $router->group(['prefix' => 'profile'], function () use ($router) {
+                    $router->get('/', [App\Http\Controllers\Web\Settings\ProfileController::class, 'index'])->name('web.profile');
+                    $router->post('/update', [App\Http\Controllers\Web\Settings\ProfileController::class, 'update']);
+                });
+            });
         });
     });
 });
