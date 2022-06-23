@@ -47,10 +47,11 @@ class ProfileController extends Controller
         try {
             DB::beginTransaction();
             $data = $this->request->all();
-            unset($data['image']);
+
             $itemData = $this->model->find(auth()->user()->id);
 
             if ($itemData && $data['password'] != '') {
+
                 if (Hash::check($data['password'], \auth()->user()->password)) {
                     if ($data['newpassword'] != '') {
                         $data['password'] = bcrypt($data['newpassword']);
@@ -63,20 +64,27 @@ class ProfileController extends Controller
                         'message' => 'El password ingresado para actualizar los datos es incorrecto, por favor verifique e intente nuevamente.'
                     ]);
                 }
+                unset($data['avatar']);
                 if (request()->hasFile('avatar')) {
                     $deleteFile = $itemData->avatar;
-                    $itemData->avatar = request()->file('avatar')->storeAs('/users', time() . '.' . request()->file('avatar')->getClientOriginalExtension(), ['disk' => 'public']);
+                    $data['avatar'] = request()->file('avatar')->storeAs('/users', time() . '.' . request()->file('avatar')->getClientOriginalExtension(), ['disk' => 'public']);
                     if ($deleteFile) {
                         Storage::disk('public')->delete($deleteFile);
                     }
                 }
-                $itemData->save();
-                dd($itemData);
-                DB::commit();
-                return $this->successResponse([
-                    'err' => false,
-                    'message' => 'Datos actualizados correctamente.'
-                ]);
+                if ($itemData->fill($data)->isDirty()) {
+                    $itemData->save();
+                    DB::commit();
+                    return $this->successResponse([
+                        'err' => false,
+                        'message' => 'Datos actualizados correctamente.'
+                    ]);
+                } else {
+                    return $this->successResponse([
+                        'err' => false,
+                        'message' => 'Ningún dato ha cambiado.'
+                    ]);
+                }
             } else {
                 DB::rollback();
                 return $this->errorResponse([

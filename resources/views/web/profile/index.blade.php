@@ -13,7 +13,7 @@
                 <div class="col-sm-6">
                     <!-- Choose image ro profile -->
                     <img class="img-rounded profile"
-                        src="{{ $data->avatar != "https://ui-avatars.com/api/?name={$data->name}" ? asset("storage/{$data->avatar}") : $data->avatar }}"
+                        src="{{ $data->avatar != "https://ui-avatars.com/api/?name={$data->name}" ? asset('storage' . '/' . $data->avatar) : $data->avatar }}"
                         id="imgProfile">
                     <div class="form-group">
                         <label for="image">Choose avatar</label>
@@ -57,7 +57,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label class="control-label">{{ __('Address') }}</label>
-                        <textarea class="form-control border-form-control" id="address" name="address">{{ $data->address ?? '' }}</textarea>
+                        <textarea class="form-control border-form-control" id="address" name="address" maxlength="255">{{ $data->address ?? '' }}</textarea>
                     </div>
                 </div>
             </div>
@@ -131,7 +131,7 @@
                 <div class="col-sm-12">
                     <div class="form-group">
                         <label class="control-label">{{ __('Bio') }}</label>
-                        <textarea class="form-control border-form-control" id="bio" name="bio">{{ $data->bio ?? '' }}</textarea>
+                        <textarea class="form-control border-form-control" id="bio" name="bio" maxlength="255">{{ $data->bio ?? '' }}</textarea>
                     </div>
                 </div>
             </div>

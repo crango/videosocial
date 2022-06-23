@@ -15,11 +15,23 @@ function imagePreview(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#frmUpdate img[id=avatar]').attr('src', e.target.result);
+            $('#frmUpdate img[id=imgProfile]').attr('src', e.target.result);
         }
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+
+function imagePreview(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#frmEdit img[id=imgProfile]').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
 
 $('#country').on('change', function() {
     var id = this.value;
