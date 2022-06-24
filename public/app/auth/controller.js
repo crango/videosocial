@@ -3,11 +3,11 @@ $("#frmLogin").validate({
         itemData = new FormData(form);
         Core.post('auth/login', itemData)
         .then(function (res) {
-            console.log(res.data);
+  //          console.log(res.data);
             if(res.data.err==false) {
                 Core.showToast('Acceso correcto.');
                 setTimeout(function() {
-                    window.location.href = $('#route_web').val();
+                    window.location.href = res.data.url;
                 },1500);
             }else{
                 Core.showToast('error','Datos de acceso incorrectos, intente nuevamente.');
@@ -22,14 +22,14 @@ $("#frmLogin").validate({
 $('#frmRegister').validate({
     submitHandler: function (form) {
         itemData = new FormData(form);
-        console.log(itemData);
+      //  console.log(itemData);
         Core.post('auth/register', itemData)
         .then(function (res) {
             console.log(res);
             if(res.data.err==false) {
                 Core.showToast('success', 'Cuenta creada correctamente.');
                 setTimeout(function() {
-                    window.location.href = $('#route_web').val();
+                    window.location.href = res.data.url;
                 },1500);
             }else{
                 Core.showToast('error','No ha sido posible crear su cuenta, por favor intente nuevamente.');
@@ -56,7 +56,7 @@ $('#country').on('change', function() {
 $('#state').on('change',function() {
     var id = this.value;
     axios.get("/cities/"+id).then(function(res) {
-        console.log(res);
+      //  console.log(res);
         $('#city').empty();
         $('#city').html("<option>Choose a City</option>");
         $.each(res.data.cities, function(key, value) {
@@ -75,11 +75,7 @@ $('#frmRecovery').validate({
             if(res.data.err==false) {
                 Core.showToast('success', 'Cuenta creada correctamente.');
                 setTimeout(function() {
-                    if(res.data.dashboard==true) {
-                        window.location.href = $('#route_dashboard').val();
-                    } else {
-                        window.location.href = $('#route_members').val();
-                    }
+                        window.location.href = res.data.url;
                 },1500);
             }else{
                 Core.showToast('error','No ha sido posible crear su cuenta, por favor intente nuevamente.');

@@ -30,7 +30,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'city_id',
         'cp',
         'bio',
-        'last_login_ip'
+        'birthdate',
+        'last_login_ip',
+        'is_email_verified'
     ];
 
     /**

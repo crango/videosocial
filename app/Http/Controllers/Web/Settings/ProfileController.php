@@ -35,7 +35,7 @@ class ProfileController extends Controller
             'cssStyles' => [
                 //      0 => 'app/' . $this->path . '/style.css'
             ],
-            'data' => auth()->user(),
+            'user' => auth()->user(),
             'countries' => Country::get(['id', 'name']),
             'states' => State::where('country_id', auth()->user()->country_id)->get(['id', 'name']),
             'cities' => City::where('state_id', auth()->user()->state_id)->get(['id', 'name'])

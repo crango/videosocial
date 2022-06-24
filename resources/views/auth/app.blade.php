@@ -39,8 +39,8 @@
                     <div class="login-main-left">
                         <div class="text-center mb-5 login-main-left-header pt-4">
                             <img src="{{ asset('dashboard/img/favicon.png') }}" class="img-fluid" alt="LOGO">
-                            <h5 class="mt-3 mb-3">Welcome to Vidoe</h5>
-                            <p>It is a long established fact that a reader <br> will be distracted by the readable.</p>
+                            <h5 class="mt-3 mb-3">{{ $title }}</h5>
+                            <p>{{ $description }}</p>
                         </div>
                         <!-- Login-->
                         @yield('content')
