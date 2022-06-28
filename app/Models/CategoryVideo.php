@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tag extends Model
+class CategoryVideo extends Model
 {
     use HasFactory;
-    protected $table = 'tags';
+    protected $table = 'category_video';
     protected $fillable = [
-        'video_id',
-        'name'
+        'category_id',
+        'video_id'
     ];
 }

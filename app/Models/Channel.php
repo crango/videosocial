@@ -29,6 +29,6 @@ class Channel extends Model
 
     public function videos()
     {
-        return $this->belongsToMany(Video::class, 'video_channels');
+        return $this->belongsToMany(Video::class, 'channel_video');
     }
 }

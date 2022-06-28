@@ -14,9 +14,8 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->unsignedBigInteger('videos_id')->primary();
-            $table->string('name', 20
-            )->index('fk_tags_name_id');
+            $table->unsignedBigInteger('video_id')->primary();
+            $table->string('name', 20)->index('fk_tags_name_id');
             $table->timestamps();
         });
     }

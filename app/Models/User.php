@@ -68,6 +68,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(City::class);
     }
 
+
+    function getChannels()
+    {
+        return $this->hasMany(Channel::class);
+    }
+
     function Subscribers()
     {
         return $this->belongsToMany(Channel::class, 'subscribers');
@@ -82,4 +88,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany(Comment::class, 'comments');
     }
+
 }
