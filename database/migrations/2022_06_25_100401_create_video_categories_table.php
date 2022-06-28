@@ -14,11 +14,9 @@ class CreateVideoCategoriesTable extends Migration
     public function up()
     {
         Schema::create('video_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('video_id');
-            $table->foreign('video_id')->references('id')->on('videos')->onDelete('cascade');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('video_id')->index('fk_video_categories_videos1_idx');
+            $table->unsignedBigInteger('category_id')->index('fk_video_categories_categories1_idx');
+            $table->primary(['video_id', 'category_id']);
             $table->timestamps();
         });
     }

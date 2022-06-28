@@ -109,8 +109,8 @@
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="cp" class="control-label">{{ __('Zip Code') }}</label>
-                        <input type="text" class="form-control border-form-control" id="cp" name="cp"
-                            value="{{ $user->cp ?? '' }}" placeholder="123456">
+                        <input type="text" class="form-control border-form-control" id="zip" name="zip"
+                            value="{{ $user->zip ?? '' }}" placeholder="123456">
                     </div>
                 </div>
             </div>

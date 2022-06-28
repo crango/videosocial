@@ -35,8 +35,8 @@ Route::group(['prefix' => '/'], function ($router) {
         $router->get('/forgot-password', [AuthController::class, 'forgot_password'])->name('forgot-password');
         $router->post('/forgot-password', [AuthController::class, 'forgot_password']);
 
-        $router->get('/home', [AuthController::class, 'web'])->middleware(['auth', 'is_verify_email'])->name('web');
-        $router->get('verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+        //  $router->get('/home', [AuthController::class, 'web'])->middleware(['auth', 'is_verify_email'])->name('web');
+        //$router->get('verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
     });
 
     $router->get('/states/{country}', [AuthController::class, 'states'])->name('states');
@@ -47,7 +47,7 @@ Route::group(['prefix' => '/'], function ($router) {
 
         $router->group(['prefix' => 'web', 'middleware' => 'auth'], function ($router) {
             # Dashboard Home
-            $router->get('/home', [HomeController::class, 'index']);
+            $router->get('/home', [HomeController::class, 'index'])->name('web.home');
 
             # Settings
             $router->group(['prefix' => 'settings'], function () use ($router) {

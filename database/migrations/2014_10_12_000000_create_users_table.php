@@ -17,22 +17,22 @@ return new class extends Migration
             $table->id();
             $table->string('avatar')->nullable();
             $table->string('name');
-            $table->string('lastname')->nullable();
+            $table->string('lastname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->boolean('is_email_verified')->default(0);
+            $table->boolean('is_email_verified')->default('0');
             $table->string('password');
-            $table->string('phone')->nullable();
+            $table->string('phone', 20)->nullable();
             $table->string('address')->nullable();
             $table->unsignedBigInteger('country_id')->nullable();
             $table->unsignedBigInteger('state_id')->nullable();
             $table->unsignedBigInteger('city_id')->nullable();
-            $table->string('cp')->nullable();
+            $table->string('zip', 10)->nullable();
             $table->date('birthdate')->nullable();
-            $table->tinyText('bio')->nullable();
-            $table->string('last_login_ip')->nullable();
+            $table->string('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

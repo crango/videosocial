@@ -31,7 +31,7 @@
 
 <body class="login-main-body">
     <input type="hidden" id="domainHost" value="{{ config('app.url') }}">
-    <input type="hidden" id="route_web" value="{{ route('web') }}">
+    <input type="hidden" id="route_web" value="{{ route('web.home') }}">
     <section class="login-main-wrapper">
         <div class="container-fluid pl-0 pr-0">
             <div class="row no-gutters">

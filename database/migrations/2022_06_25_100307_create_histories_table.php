@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSettingsTable extends Migration
+class CreateHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->id();
+        Schema::create('histories', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id')->index('fk_histories_user_id');
+            $table->unsignedBigInteger('video_id')->index('fk_histories_video_id');
+            $table->primary(['user_id', 'video_id']);
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('histories');
     }
 }

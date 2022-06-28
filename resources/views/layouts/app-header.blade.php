@@ -4,7 +4,7 @@
     <button class="btn btn-link btn-sm text-secondary order-1 order-sm-0" id="sidebarToggle">
         <i class="fas fa-bars"></i>
     </button> &nbsp;&nbsp;
-    <a class="navbar-brand mr-1" href="{{ route('web') }}">
+    <a class="navbar-brand mr-1" href="{{ route('web.home') }}">
         <img class="img-fluid" alt="" src="{{ asset('dashboard/img/logo.png') }}">
     </a>
     <!-- Navbar Search -->

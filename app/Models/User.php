@@ -22,17 +22,16 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'lastname',
         'email',
+        'is_email_verified',
         'password',
         'phone',
         'address',
         'country_id',
         'state_id',
         'city_id',
-        'cp',
-        'bio',
+        'zip',
         'birthdate',
-        'last_login_ip',
-        'is_email_verified'
+        'bio'
     ];
 
     /**
@@ -67,5 +66,20 @@ class User extends Authenticatable implements MustVerifyEmail
     function getCity()
     {
         return $this->belongsTo(City::class);
+    }
+
+    function Subscribers()
+    {
+        return $this->belongsToMany(Channel::class, 'subscribers');
+    }
+
+    function histories()
+    {
+        return $this->belongsToMany(Video::class, 'histories');
+    }
+
+    function Comments()
+    {
+        return $this->belongsToMany(Comment::class, 'comments');
     }
 }

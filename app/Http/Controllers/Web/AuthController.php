@@ -43,20 +43,21 @@ class AuthController extends Controller
             ]);
         }
 
-        auth()->attempt(request()->only('email', 'password'));
+        $credentials = request()->only('email', 'password');
 
-        if (!auth()->check()) {
+        if (auth()->attempt($credentials)) {
+
+            return $this->successResponse([
+                'err' => false,
+                'message' => __('Login success'),
+                'url' => route('web.home'),
+            ]);
+        } else {
             return $this->errorResponse([
                 'err' => true,
-                'message' => __('Wrong email or password')
+                'message' => __('Login failed'),
             ]);
         }
-
-        return $this->successResponse([
-            'err'        => false,
-            'message'    => __('Login success'),
-            'url'      => route('web'),
-        ]);
     }
 
 
@@ -127,18 +128,10 @@ class AuthController extends Controller
                     $message->subject('Email Verification Mail');
                 });
 
-
-
-                //    return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
-
-
-                // auth()->attempt(request()->only('email', 'password'));
-
                 return $this->successResponse([
                     'err' => false,
-                    //'message' => __('Register success'),
                     'message' => __('Great! You have Successfully loggedin'),
-                    'url' => route('web')
+                    'url' => route('login')
                 ]);
             } catch (\Exception $e) {
                 DB::rollback();
@@ -233,26 +226,6 @@ class AuthController extends Controller
     {
         $data['cities'] = City::where("state_id", $state)->get(["id", "name"]);
         return response()->json($data);
-    }
-
-
-    public function web()
-    {
-        if (auth()->check()) {
-            return view('web', [
-                'jsControllers' => [
-                    0 => 'app/' . $this->path . '/controller.js',
-                ],
-                'cssStyles' => [
-                    //0 => 'app/' . $this->path . '/style.css'
-                ],
-                'title' => __('Reset Password'),
-                'description' => __('It is a long established fact that a reader') . "\n" . __('will be distracted by the readable.')
-            ]);
-        }
-
-
-        return redirect("login")->withSuccess('Opps! You do not have access');
     }
 
 
