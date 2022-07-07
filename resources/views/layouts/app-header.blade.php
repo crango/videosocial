@@ -65,7 +65,8 @@
                 {{ auth()->user()->name }}
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="account.html"><i class="fas fa-fw fa-user-circle"></i> &nbsp; My
+                <a class="dropdown-item" href="{{ route('web.account') }}"><i class="fas fa-fw fa-user-circle"></i>
+                    &nbsp; My
                     Account</a>
                 <a class="dropdown-item" href="subscriptions.html"><i class="fas fa-fw fa-video"></i> &nbsp;
                     Subscriptions</a>

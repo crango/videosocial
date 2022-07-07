@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PlaylistVideo extends Model
 {
     use HasFactory;
-    protected $table = 'playlist_video';
+
     protected $fillable = [
         'playlist_id',
         'video_id'

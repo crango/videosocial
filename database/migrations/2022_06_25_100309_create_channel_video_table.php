@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateChannelVideoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->enum('status', ['1', '2'])->default('1')->comment('1: Active 2: Inactive');
+        Schema::create('channel_video', function (Blueprint $table) {
+            $table->unsignedBigInteger('video_id')->index('fk_channel_video_video_id');
+            $table->unsignedBigInteger('channel_id')->index('fk_channel_video_channel_id');
+         //   $table->primary(['video_id', 'channel_id']);
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('channel_video');
     }
 }

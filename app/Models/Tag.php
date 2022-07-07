@@ -13,4 +13,5 @@ class Tag extends Model
         'video_id',
         'name'
     ];
+
 }

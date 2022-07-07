@@ -29,7 +29,7 @@ return new class extends Migration
             $table->unsignedBigInteger('city_id')->nullable();
             $table->string('zip', 10)->nullable();
             $table->date('birthdate')->nullable();
-            $table->string('bio')->nullable();
+            $table->text('bio')->nullable();
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

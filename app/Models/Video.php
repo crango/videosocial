@@ -22,31 +22,37 @@ class Video extends Model
         'cast',
         'views',
         'likes',
-        'dislikes'
+        'dislikes',
+        'user_id'
     ];
 
-    public function channel()
+    public function Owner()
     {
-        return $this->belongsToMany(Channel::class, 'channel_video');
+        return $this->belongsTo(User::class);
     }
 
-    public function categories()
+    public function Channels()
     {
-        return $this->belongsToMany(Category::class, 'category_video');
+        return $this->belongsToMany(Channel::class);
     }
 
-    public function playlists()
+    public function Categories()
     {
-        return $this->belongsToMany(Playlist::class, 'playlist_video');
+        return $this->belongsToMany(Category::class);
     }
 
-    public function histories()
+    public function Histories()
     {
-        return $this->belongsToMany(History::class, 'histories');
+        return $this->belongsToMany(User::class, 'histories', 'video_id', 'user_id')->withTimestamps();
     }
 
-    public function comments()
+    public function Comments()
     {
-        return $this->belongsToMany(Comment::class, 'comments');
+        return $this->belongsToMany(User::class, 'comments', 'video_id', 'user_id')->withTimestamps();
+    }
+
+    public function Playlists()
+    {
+        return $this->belongsToMany(Playlist::class);
     }
 }

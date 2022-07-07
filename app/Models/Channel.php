@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     use HasFactory;
-    protected $table = 'channels';
+
     protected $fillable = [
         'title',
         'about',
@@ -19,16 +19,21 @@ class Channel extends Model
         'in',
         'status',
         'user_id',
-        'suscribers'
+        'subscriptions'
     ];
 
-    function Subscribers()
+    public function Owner()
     {
-        return $this->belongsToMany(User::class, 'subscribers');
+        return $this->belongsTo(User::class);
     }
 
-    public function videos()
+    function Subscriptions()
     {
-        return $this->belongsToMany(Video::class, 'channel_video');
+        return $this->belongsToMany(User::class, 'subscriptions', 'channel_id', 'user_id');
+    }
+
+    public function Videos()
+    {
+        return $this->belongsToMany(Video::class);
     }
 }

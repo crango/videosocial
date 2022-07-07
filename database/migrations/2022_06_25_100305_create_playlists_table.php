@@ -18,6 +18,7 @@ class CreatePlaylistsTable extends Migration
             $table->string('title', 20);
             $table->string('about');
             $table->string('image');
+            $table->enum('status', ['1', '2'])->default('1')->comment('1: Active 2: Inactive');
             $table->timestamps();
             $table->softDeletes();
         });

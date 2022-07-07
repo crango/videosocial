@@ -16,7 +16,7 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id')->index('fk_histories_user_id');
             $table->unsignedBigInteger('video_id')->index('fk_histories_video_id');
-            $table->primary(['user_id', 'video_id']);
+            //$table->primary(['user_id', 'video_id']);
             $table->timestamps();
         });
     }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Channel;
 use Illuminate\Http\Request;
 
-class ChannelController extends Controller 
+class ChannelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

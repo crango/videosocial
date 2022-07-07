@@ -68,25 +68,28 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsTo(City::class);
     }
 
-
-    function getChannels()
+    public function Channels()
     {
         return $this->hasMany(Channel::class);
     }
 
-    function Subscribers()
+    public function Videos()
     {
-        return $this->belongsToMany(Channel::class, 'subscribers');
+        return $this->hasMany(Video::class);
     }
 
-    function histories()
+    public function Subscriptions()
     {
-        return $this->belongsToMany(Video::class, 'histories');
+        return $this->belongsToMany(Channel::class, 'subscriptions', 'user_id', 'channel_id')->withTimestamps();
     }
 
-    function Comments()
+    public function Histories()
     {
-        return $this->belongsToMany(Comment::class, 'comments');
+        return $this->belongsToMany(Video::class, 'histories', 'user_id', 'video_id')->withTimestamps();
     }
 
+    public function Comments()
+    {
+        return $this->belongsToMany(Video::class, 'comments', 'user_id', 'video_id')->withTimestamps();
+    }
 }

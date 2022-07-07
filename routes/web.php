@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Web\HomeController;
+use App\Http\Controllers\Web\Settings\AccountController;
 use App\Http\Controllers\Web\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,7 @@ Route::group(['prefix' => '/'], function ($router) {
         $router->post('/forgot-password', [AuthController::class, 'forgot_password']);
 
         //  $router->get('/home', [AuthController::class, 'web'])->middleware(['auth', 'is_verify_email'])->name('web');
-        //$router->get('verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
+        $router->get('verify/{token}', [AuthController::class, 'verifyAccount'])->name('user.verify');
     });
 
     $router->get('/states/{country}', [AuthController::class, 'states'])->name('states');
@@ -51,10 +52,16 @@ Route::group(['prefix' => '/'], function ($router) {
 
             # Settings
             $router->group(['prefix' => 'settings'], function () use ($router) {
+
                 # Profile
                 $router->group(['prefix' => 'profile'], function () use ($router) {
                     $router->get('/', [ProfileController::class, 'index'])->name('web.profile');
                     $router->post('/update', [ProfileController::class, 'update']);
+                });
+
+                #account
+                $router->group(['prefix' => 'account'], function () use ($router) {
+                    $router->get('/', [AccountController::class, 'index'])->name('web.account');
                 });
             });
         });

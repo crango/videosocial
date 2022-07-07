@@ -17,7 +17,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('user_id')->index('fk_comments_user_id');
             $table->unsignedBigInteger('video_id')->index('fk_comments_video_id');
             $table->string('comment');
-            $table->primary(['user_id', 'video_id']);
+            // $table->primary(['user_id', 'video_id']);
             $table->timestamps();
         });
     }

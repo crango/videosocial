@@ -2,9 +2,17 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
+use App\Models\CategoryVideo;
+use App\Models\User;
+use App\Models\Channel;
+use App\Models\ChannelVideo;
+use App\Models\Comment;
+use App\Models\History;
+use App\Models\Subscription;
+use App\Models\Video;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,21 +25,19 @@ class DatabaseSeeder extends Seeder
     {
 
         //disable foreign key check for this connection before running seeders
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-  
-        $this->call(CountrySeeder::class);
-        $this->call(StateSeeder::class);
-        $this->call(CitySeeder::class);
+        Schema::disableForeignKeyConstraints();
+        User::truncate();
+        Channel::truncate();
+        Subscription::truncate();
+        Video::truncate();
+        ChannelVideo::truncate();
+        CategoryVideo::truncate();
+        Category::truncate();
+        History::truncate();
+        Comment::truncate();
+        Schema::enableForeignKeyConstraints();
 
-        // supposed to only apply to a single connection and reset it's self
-        // but I like to explicitly undo what I've done for clarity
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(UserSeeder::class);
+        $this->call(VideoSeeder::class);
     }
 }
